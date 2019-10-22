@@ -1,7 +1,7 @@
 #!/bin/bash
-set -e
+shopt -s nullglob
 
-echo "WP Boilerplate Version Changer 1.1.1 by Mte90 & deshack"
+echo "WP Version Changer 2.0 by Mte90 & deshack"
 
 if [ "$1" == "-h" ] || [ $# -eq 0 ]; then
 	echo "Change the version in a wordpress plugin ('pluginrootfile'.php and README.txt)"
@@ -19,12 +19,15 @@ else
 	echo "Missing README.txt"
 fi
 
-rootfiles=( "${1}/*.php" )
-rootfile="${rootfiles[0]}"
-
-LINE=$(sed -n '/PN_VERSION/{=}' "$rootfile")
-sed -i "${LINE}s/.*/define( 'PN_VERSION', '${2}' );/" "$rootfile"
-LINE=$(sed -n '/ * Version:/{=}' "$rootfile")
-sed -i "${LINE}s/.*/ * Version:           ${2}/" "$rootfile"
+rootfile=$(ls "${1}"*.php | head -1)
+if [ -f "$rootfile" ]; then
+    constant=$(grep "_VERSION" "$rootfile" | awk -F "'" '{print $2}')
+    LINE=$(sed -n "/$constant/{=}" "$rootfile")
+    sed -i "${LINE}s/.*/define( '${constant}', '${2}' );/" "$rootfile"
+    LINE=$(sed -n '/ * Version:/{=}' "$rootfile")
+    sed -i "${LINE}s/.*/ * Version:           ${2}/" "$rootfile"
+else
+	echo "Missing PHP file in the folder"
+fi
 
 echo "Done! YOORAH!"
