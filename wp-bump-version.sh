@@ -23,11 +23,12 @@ rootfile=$(ls "${1}"*.php | head -1)
 if [ -f "$rootfile" ]; then
     constant=$(grep "_VERSION" "$rootfile" | awk -F "'" '{print $2}')
     LINE=$(sed -n "/$constant/{=}" "$rootfile")
-    sed -i "${LINE}s/.*/define( '${constant}', '${2}' );/" "$rootfile"
+    spaces=$(sed -n ${LINE}p "$rootfile" | awk -F "define" '{print $1}')
+    sed -i "${LINE}s/.*/${spaces}define( '${constant}', '${2}' );/" "$rootfile"
     LINE=$(sed -n '/ * Version:/{=}' "$rootfile")
     sed -i "${LINE}s/.*/ * Version:           ${2}/" "$rootfile"
 else
 	echo "Missing PHP file in the folder"
 fi
 
-echo "Done! YOORAH!"
+echo "  Done! YOORAH!"
