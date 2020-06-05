@@ -17,7 +17,7 @@ wget -O /usr/local/bin/wp-bump-version https://raw.githubusercontent.com/WPBP/to
 USE:
 
 ```
-wp-wp-readme-last-wp-tested /path/my-new-plugin/readme.txt
+wp-readme-last-wp-tested /path/my-new-plugin/readme.txt
 ```
 
 Automatically will change the version in `Tested up` field to the last WordPress version avalaible.
