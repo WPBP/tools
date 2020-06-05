@@ -12,6 +12,16 @@ Download the script, move in /usr/local/bin and set the permission
 wget -O /usr/local/bin/wp-bump-version https://raw.githubusercontent.com/WPBP/tools/master/wp-bump-version.sh | chmod +x /usr/local/bin/wp-bump-version
 ```
 
+## wp-readme-last-wp-tested
+
+USE:
+
+```
+wp-wp-readme-last-wp-tested /path/my-new-plugin/readme.txt
+```
+
+Automatically will change the version in `Tested up` field to the last WordPress version avalaible.
+
 ## Localization Tools
 
 The WordPress Plugin Boilerplate uses a variable to store the text domain used when internationalizing strings throughout the Boilerplate. To take advantage of this method, there are tools that are recommended for providing correct, translatable files:
@@ -33,7 +43,3 @@ On [https://github.com/sudar/wp-plugin-in-github](https://github.com/sudar/wp-pl
     create-archive.sh - Use this script to create a zip archive of the Plugin
     update-version.sh - Use this script to update version string in all the files of the Plugin
  
-
-## Deprecated
-
-The `apigen.sh` is deprecated but is kept on the repo for archive reason.

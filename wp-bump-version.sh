@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 shopt -s nullglob
 
 echo "WP Version Changer 2.0 by Mte90 & deshack"
